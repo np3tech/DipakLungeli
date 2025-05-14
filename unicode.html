@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unicode Projector</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .controls-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 90%;
+            max-width: 500px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .controls-container > div {
+            flex-grow: 1;
+            min-width: 150px;
+        }
+        .controls-container label, .controls-container select, .controls-container input[type="color"], .controls-container input[type="number"] {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+        input[type="text"], button {
+            padding: 12px;
+            font-size: 18px;
+            width: calc(100% - 24px);
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            font-size: 28px;
+            font-weight: bold;
+            word-break: break-word;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            white-space: pre-wrap;
+        }
+        .download-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .download-options button {
+            flex-grow: 1;
+        }
+        .animated-text {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .scroll-left {
+            animation: scroll-left 10s linear infinite;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .controls-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+            .controls-container > div {
+                min-width: auto;
+            }
+            .container, .controls-container {
+                margin: 10px;
+                padding: 15px;
+            }
+            input[type="text"], button, #output, .controls-container label, .controls-container select, .controls-container input[type="color"], .controls-container input[type="number"] {
+                font-size: 16px;
+            }
+            #output {
+                padding: 15px;
+                font-size: 24px;
+            }
+            .download-options {
+                flex-direction: column;
+            }
+            .download-options button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls-container">
+        <div>
+            <label for="fontSize">Font Size:</label>
+            <input type="number" id="fontSize" value="28" min="12" max="72">
+        </div>
+        <div>
+            <label for="fontFamily">Font Style:</label>
+            <select id="fontFamily">
+                <option value="sans-serif">Sans-Serif</option>
+                <option value="serif">Serif</option>
+            </select>
+        </div>
+        <div>
+            <label for="textColor">Text Color:</label>
+            <input type="color" id="textColor" value="#000000">
+        </div>
+        <div>
+            <label for="bgColor">Background Color:</label>
+            <input type="color" id="bgColor" value="#f9f9f9">
+        </div>
+        <div>
+            <label for="animation">Animation:</label>
+            <select id="animation">
+                <option value="none">None</option>
+                <option value="scroll-left">Scroll Left</option>
+            </select>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Unicode Projector</h1>
+        <input type="text" id="unicodeInput" placeholder="Enter Unicode Text...">
+        <button onclick="projectText()">Project</button>
+    </div>
+    <div id="output">Text will appear here</div>
+
+    <div class="download-options">
+        <button onclick="downloadAsImage()">Download as Image</button>
+        <button onclick="downloadAsText()">Download as Text</button>
+    </div>
+
+    <script>
+        const unicodeInput = document.getElementById("unicodeInput");
+        const outputDiv = document.getElementById("output");
+        const fontSizeInput = document.getElementById("fontSize");
+        const fontFamilySelect = document.getElementById("fontFamily");
+        const textColorInput = document.getElementById("textColor");
+        const bgColorInput = document.getElementById("bgColor");
+        const animationSelect = document.getElementById("animation");
+
+        function updateOutput() {
+            outputDiv.textContent = unicodeInput.value;
+            outputDiv.style.fontSize = fontSizeInput.value + "px";
+            outputDiv.style.fontFamily = fontFamilySelect.value;
+            outputDiv.style.color = textColorInput.value;
+            outputDiv.style.backgroundColor = bgColorInput.value;
+
+            // Apply animation
+            outputDiv.className = animationSelect.value === "scroll-left" ? "animated-text scroll-left" : "";
+        }
+
+        function projectText() {
+            updateOutput();
+        }
+
+        // Event listeners for real-time updates
+        unicodeInput.addEventListener("input", updateOutput);
+        fontSizeInput.addEventListener("input", updateOutput);
+        fontFamilySelect.addEventListener("change", updateOutput);
+        textColorInput.addEventListener("input", updateOutput);
+        bgColorInput.addEventListener("input", updateOutput);
+        animationSelect.addEventListener("change", updateOutput);
+
+        function downloadAsImage() {
+            html2canvas(outputDiv).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'unicode_text.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        function downloadAsText() {
+            const text = outputDiv.textContent;
+            const filename = 'unicode_text.txt';
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        // Initial update to show empty output
+        updateOutput();
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
