@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Word Counter</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #1a237e;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      font-size: 1rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+    }
+    .stats {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Simple Word Counter</h1>
+    <p>Enter your text to count words and characters in real-time.</p>
+    <textarea id="textInput" placeholder="Type or paste your content here..."></textarea>
+    <div class="stats" id="statsDisplay">Words: 0 | Characters: 0</div><script>
+  const input = document.getElementById('textInput');
+  const stats = document.getElementById('statsDisplay');
+
+  input.addEventListener('input', () => {
+    const text = input.value.trim();
+    const wordCount = text === '' ? 0 : text.split(/\s+/).length;
+    const charCount = text.length;
+    stats.textContent = `Words: ${wordCount} | Characters: ${charCount}`;
+  });
+</script>
+
+  </div>
+
+<footer>
+&copy; 2025 Dipak Lungeli — All Rights Reserved
+</footer>
+
+</body>
+</html>
