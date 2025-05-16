@@ -24,7 +24,8 @@ nav a {
 color: #fff;      
 text-decoration: none;      
 margin: 0 15px;      
-font-weight: bold;    
+font-weight: bold;      
+transition: text-decoration 0.3s ease; /* Smooth transition for underline */
 }    
 nav a:hover {      
 text-decoration: underline;    
@@ -36,42 +37,49 @@ margin: auto;
 text-align: center;    
 }    
 h2 {      
-color: #002244;    
-}
-    .bio {      
+color: #002244;      
+margin-bottom: 30px; /* Added space below heading */
+}    
+.bio {      
 text-align: left;      
 margin-top: 20px;      
 background: #fff;      
-padding: 25px;      
+padding: 30px; /* Increased padding */      
 border-radius: 8px;      
-box-shadow: 0 0 10px rgba(0,0,0,0.05);    
+box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Softer, more prominent shadow */
+line-height: 1.7; /* Improved readability */
 }    
+.bio p {
+margin-bottom: 15px; /* Space between paragraphs */
+}
 footer {      
 background-color: #222;      
 color: #aaa;      
-padding: 10px 0;      
+padding: 15px 0; /* Increased padding */      
 text-align: center;      
-margin-top: 50px;    
+margin-top: 50px;      
+font-size: 0.9em; /* Slightly smaller font for footer */
 }    
 /* Media Queries for Responsive Design */    
 @media (max-width: 768px) {      
 nav a {        
 display: block;        
 margin: 10px 0;      
-}
-      .bio {        
-padding: 15px;      
+}      
+.bio {        
+padding: 20px; /* Adjusted padding for tablets */      
 }    
 }    
 @media (max-width: 480px) {      
 header h1 {        
-font-size: 24px;      
+font-size: 28px; /* Slightly larger for better readability on small screens */      
 }      
 h2 {        
-font-size: 20px;      
-}
-      .bio {        
-font-size: 14px;      
+font-size: 22px; /* Adjusted for better hierarchy */      
+}      
+.bio {        
+font-size: 15px; /* Slightly larger font */        
+padding: 15px;      
 }    
 }  
 </style>
@@ -89,7 +97,7 @@ font-size: 14px;
 <main>    
 <h2>Welcome to My Personal Website</h2>    
 <div class="bio">      
-<p>Hello! I’m <strong>Dipak Lungeli</strong> from Gandaki Province. I’m a passionate <strong>web developer</strong>, <strong>music producer</strong>, and a writer of philosophical and creative content including poems, ghazals, stories, and articles. I explore the intersections of culture, history, AI, and social ideas.</p>      <br><br>
+<p>Hello! I’m <strong>Dipak Lungeli</strong> from Gandaki Province. I’m a passionate <strong>web developer</strong>, <strong>music producer</strong>, and a writer of philosophical and creative content including poems, ghazals, stories, and articles. I explore the intersections of culture, history, AI, and social ideas.</p>      
 <p>On this website, you'll find my personal and professional projects, writings, music productions, and thoughtful insights. My goal is to blend art with technology and present meaningful content that reflects curiosity, identity, and modern creativity.</p>      
 <p>Feel free to explore the different sections using the navigation menu above. Thank you for visiting!</p>    
 </div>  
